@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu.jsx";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar.jsx";
+import profileImage from "@/assets/profile.png";
 
 import {
   Sheet,
@@ -58,8 +59,8 @@ const UserMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" alt="user image" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={profileImage} alt="user image" />
+          <AvatarFallback>User</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
