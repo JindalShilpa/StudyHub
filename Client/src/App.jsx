@@ -5,6 +5,7 @@ import IntroSection from "./pages/student-section/IntroSection";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import { RouterProvider } from "react-router";
+import Courses from "./pages/student-section/Courses";
 
 const appRouter = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <IntroSection />
-            {/*Course*/}
+            <Courses/>
           </>
         ),
       },
