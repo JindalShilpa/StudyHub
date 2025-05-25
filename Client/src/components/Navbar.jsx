@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sheet.jsx";
 
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const user = true;
@@ -67,8 +68,12 @@ const UserMenu = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>My Learning</DropdownMenuItem>
-          <DropdownMenuItem>Edit Profile</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link to="my-learning">My Learning </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link to="profile">Edit Profile</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Log out</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

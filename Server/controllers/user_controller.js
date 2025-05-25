@@ -71,6 +71,45 @@ export const loginUser = async (req, res) => {
     generateToken(res, user, `Welcome back ${user.name}!`);
   } catch (error) {
     console.error("Error logging in user:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Failed to Login" });
+  }
+};
+
+export const logoutUser = async (req, res) => {
+  try {
+    return res
+      .status(200)
+      .cookie("token", "", {
+        maxAge: 0,
+      })
+      .json({
+        message: "User Logged out Successfully",
+        success: true,
+      });
+  } catch (error) {
+    console.error("Error logging out user:", error);
+    res.status(500).json({ success: false, message: "Failed to Logout" });
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const userId = req.id;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({
+        message: "User Profile not Found",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to Fetch User Profile" });
   }
 };
