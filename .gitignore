@@ -1,0 +1,39 @@
+# OS / Editor-specific
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*.local
+Client/.env
+Client/.env.*.local
+Server/.env
+Server/.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+Client/node_modules/
+Server/node_modules/
+
+# Build output
+Client/dist/
+Client/build/
+Client/.vite/
+Client/.next/
+Client/coverage/
+
+Server/dist/
+Server/build/
+Server/coverage/
+
+# Lock files (optional, if not using)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
