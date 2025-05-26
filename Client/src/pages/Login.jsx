@@ -112,13 +112,13 @@ const Login = () => {
         <TabsContent value="signup">
           <Card>
             <CardHeader>
-              <CardTitle>SignUp</CardTitle>
+              <CardTitle className="mt-5">SignUp</CardTitle>
               <CardDescription>
                 Don't have an account? Sign up here.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
+            <CardContent className="space-y-3">
+              <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
                   type="text"
@@ -130,7 +130,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   type="email"
@@ -142,7 +142,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   type="password"
@@ -158,6 +158,7 @@ const Login = () => {
             <CardFooter>
               <Button
                 disabled={signUpIsLoading}
+                className="mt-3"
                 onClick={() => handleAuth("signup")}
               >
                 {signUpIsLoading ? (
@@ -175,12 +176,12 @@ const Login = () => {
         <TabsContent value="login">
           <Card>
             <CardHeader>
-              <CardTitle>Login</CardTitle>
+              <CardTitle className="mt-5">Login</CardTitle>
               <CardDescription>
                 Already have an account? Login here.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-3">
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -193,7 +194,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
@@ -208,6 +209,7 @@ const Login = () => {
             </CardContent>
             <CardFooter>
               <Button
+                className="mt-3"
                 disabled={loginIsLoading}
                 onClick={() => handleAuth("login")}
               >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { School, Menu } from "lucide-react";
 import { Button } from "./ui/Button";
 import DarkMode from "../DarkMode.jsx";
@@ -24,10 +24,28 @@ import {
 } from "@/components/ui/sheet.jsx";
 
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutUserMutation } from "@/features/api/authApi";
+import { toast } from "sonner";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user = true;
+  const { user } = useSelector((store) => store.auth);
+
+  const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
+
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    await logoutUser();
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message || "User logout successfully.");
+    }
+  }, [isSuccess]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-10 h-16 border-b bg-white dark:bg-[#0A0A0A] border-b-gray-200 dark:border-b-gray-800 duration-300">
@@ -39,7 +57,11 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-6">
           <DarkMode />
-          {user ? <UserMenu /> : <AuthButtons />}
+          {user ? (
+            <UserMenu user={user} onLogout={logoutHandler} />
+          ) : (
+            <AuthButtons />
+          )}
         </div>
       </div>
 
@@ -55,12 +77,15 @@ const Navbar = () => {
 export default Navbar;
 
 // User Dropdown for Desktop
-const UserMenu = () => {
+const UserMenu = ({ user, onLogout }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src={profileImage} alt="user image" />
+          <AvatarImage
+            src={user?.profileUrl || profileImage}
+            alt="user image"
+          />
           <AvatarFallback>User</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -74,12 +99,16 @@ const UserMenu = () => {
           <DropdownMenuItem>
             <Link to="profile">Edit Profile</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Log out</DropdownMenuItem>
+          <DropdownMenuItem onClick={onLogout}>Log out</DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="font-semibold text-blue-600 hover:text-blue-700">
-          Dashboard
-        </DropdownMenuItem>
+        {user.role === "instructor" && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="font-semibold text-green-600 hover:text-green-700">
+              Dashboard
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -133,10 +162,13 @@ const MobileNavBar = () => {
 
 // Login / Signup Buttons (Desktop Only)
 const AuthButtons = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outline">Login</Button>
-      <Button>Signup</Button>
+      <Button variant="outline" onClick={() => navigate("/login")}>
+        Login
+      </Button>
+      <Button onClick={() => navigate("/login")}>Signup</Button>
     </div>
   );
 };
