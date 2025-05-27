@@ -78,6 +78,7 @@ export default Navbar;
 
 // User Dropdown for Desktop
 const UserMenu = ({ user, onLogout }) => {
+  const navigate=useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -104,7 +105,7 @@ const UserMenu = ({ user, onLogout }) => {
         {user.role === "instructor" && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-semibold text-green-600 hover:text-green-700">
+            <DropdownMenuItem  onClick={()=> navigate("/admin/dashboard")} className="font-semibold text-green-600 hover:text-green-700">
               Dashboard
             </DropdownMenuItem>
           </>

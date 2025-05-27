@@ -1,10 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./database/db.js";
-import userRoutes from "./routes/user_routes.js";
+import userRoute from "./routes/user_routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import courseRoute from "./routes/course_route.js"
 dotenv.config();
 
 //call db connection here
@@ -22,7 +22,8 @@ app.use(
   })
 );
 
-app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/course", courseRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

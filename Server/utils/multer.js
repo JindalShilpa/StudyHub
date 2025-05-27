@@ -1,7 +1,5 @@
 import multer from "multer";
 
-// const upload=multer({dest:"uploads/"});
-const storage = multer.memoryStorage(); // store in memory, not disk
-const upload = multer({ storage });
+const upload = multer({ dest: "uploads/" });
 
 export default upload;
