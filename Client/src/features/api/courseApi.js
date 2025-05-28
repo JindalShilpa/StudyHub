@@ -33,7 +33,6 @@ export const courseApi = createApi({
         if (sortByPrice) {
           queryString += `&sortByPrice=${encodeURIComponent(sortByPrice)}`;
         }
-
         return {
           url: queryString,
           method: "GET",
@@ -76,7 +75,7 @@ export const courseApi = createApi({
     }),
     getCourseLecture: builder.query({
       query: (courseId) => ({
-        url: `/${courseId}/lecture`,
+        url: `/${courseId}/lecture`, 
         method: "GET",
       }),
       providesTags: ["Refetch_Lecture"],

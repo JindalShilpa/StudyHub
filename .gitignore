@@ -21,6 +21,7 @@ yarn-error.log*
 # Dependency directories
 Client/node_modules/
 Server/node_modules/
+Server/uploads/
 
 # Build output
 Client/dist/

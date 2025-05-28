@@ -246,6 +246,7 @@ export const getCourseLecture = async (req, res) => {
     });
   }
 };
+
 export const editLecture = async (req, res) => {
   try {
     const { lectureTitle, videoInfo, isPreviewFree } = req.body;
@@ -334,7 +335,6 @@ export const getLectureById = async (req, res) => {
 };
 
 // publich unpublish course logic
-
 export const togglePublishCourse = async (req, res) => {
   try {
     const { courseId } = req.params;

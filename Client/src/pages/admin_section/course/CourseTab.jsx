@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import RichTextEditor from "@/components/RichTextEditor";
 import { Button } from "@/components/ui/button";
 import {
@@ -137,7 +138,12 @@ const CourseTab = () => {
     }
   }, [isSuccess, error]);
 
-  if (getCourseByIdLoading) return <h1>Loading...</h1>;
+  if (getCourseByIdLoading)
+    return (
+      <>
+        <LoadingSpinner />
+      </>
+    );
 
   return (
     <Card>
