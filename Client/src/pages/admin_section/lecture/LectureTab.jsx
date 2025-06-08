@@ -35,12 +35,16 @@ const LectureTab = () => {
 
   const { data: lectureData } = useGetLectureByIdQuery(lectureId);
   const lecture = lectureData?.lecture;
+  const [replaceVideo, setReplaceVideo] = useState(false);
 
   useEffect(() => {
     if (lecture) {
       setLectureTitle(lecture.lectureTitle);
       setIsFree(lecture.isPreviewFree);
-      setUploadVideoInfo(lecture.videoInfo);
+      setUploadVideoInfo({
+        videoUrl: lecture.videoUrl,
+        publicId: lecture.publicId,
+      });
     }
   }, [lecture]);
 
@@ -83,8 +87,6 @@ const LectureTab = () => {
   };
 
   const editLectureHandler = async () => {
-    console.log({ lectureTitle, uploadVideoInfo, isFree, courseId, lectureId });
-
     await edtiLecture({
       lectureTitle,
       videoInfo: uploadVideoInfo,
@@ -157,13 +159,42 @@ const LectureTab = () => {
           <Label className="mb-2">
             Video <span className="text-red-500">*</span>
           </Label>
-          <Input
-            type="file"
-            accept="file/*"
-            onChange={fileChangeHandler}
-            placeholder="Ex. Introduction to Javascript"
-            className="w-fit"
-          />
+
+          {uploadVideoInfo?.videoUrl && (
+            <div className="flex items-center space-x-2 mb-2">
+              <Switch
+                checked={replaceVideo}
+                onCheckedChange={setReplaceVideo}
+                id="replace-video"
+              />
+              <Label htmlFor="replace-video">
+                Replace existing video lecture?
+              </Label>
+            </div>
+          )}
+
+          {replaceVideo && (
+            <Input
+              type="file"
+              accept="video/*"
+              onChange={fileChangeHandler}
+              placeholder="Ex. Introduction to Javascript"
+              className="w-fit"
+            />
+          )}
+
+          {uploadVideoInfo?.videoUrl && (
+            <div className="mt-4">
+              <p className="text-sm text-muted-foreground mb-1">
+                Previously uploaded lecture:
+              </p>
+              <video
+                controls
+                src={uploadVideoInfo.videoUrl}
+                className="rounded-lg  max-h-[150px] object-contain"
+              />
+            </div>
+          )}
         </div>
         <div className="flex items-center space-x-2 my-5">
           <Switch
@@ -182,7 +213,10 @@ const LectureTab = () => {
         )}
 
         <div className="mt-4">
-          <Button disabled={isLoading} onClick={editLectureHandler}>
+          <Button
+            disabled={isLoading || mediaProgress}
+            onClick={editLectureHandler}
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

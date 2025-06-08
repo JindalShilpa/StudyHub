@@ -1,5 +1,5 @@
-import { CourseProgress } from "../models/courseProgress.js";
-import { Course } from "../models/course.model.js";
+import { CourseProgress } from "../models/courseProgress_model.js";
+import { Course } from "../models/course_model.js";
 
 export const getCourseProgress = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ export const getCourseProgress = async (req, res) => {
       });
     }
 
-    // Step-3 Return the user's course progress alog with course details
+    // Step-3 Return the user's course progress along with course details
     return res.status(200).json({
       data: {
         courseDetails,

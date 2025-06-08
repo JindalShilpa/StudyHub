@@ -1,10 +1,17 @@
 import React from "react";
 import Course from "./Course.jsx";
 import MySkeleton from "@/components/MySkelton.jsx";
+import { useGetPublishedCourseQuery } from "@/features/api/courseApi.js";
 
 function Courses() {
-  const isLoading = false;
-  const courses = [1, 2, 3, 4, 5, 6, 7, 8];
+  const { data, isLoading, isError } = useGetPublishedCourseQuery();
+
+  if (isError) {
+    return (
+      <h1>Unable to load courses at the moment. Please try again later.</h1>
+    );
+  }
+
   return (
     <div className="bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
@@ -14,7 +21,8 @@ function Courses() {
             ? Array.from({ length: 8 }).map((_, index) => (
                 <MySkeleton key={index} />
               ))
-            : courses.map((_, i) => <Course key={i} />)}
+            : data?.courses &&
+              data?.courses.map((course, i) => <Course key={i} course={course} />)}
         </div>
       </div>
     </div>

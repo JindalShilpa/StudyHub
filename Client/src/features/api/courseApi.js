@@ -39,12 +39,7 @@ export const courseApi = createApi({
         };
       },
     }),
-    getPublishedCourse: builder.query({
-      query: () => ({
-        url: "/published-courses",
-        method: "GET",
-      }),
-    }),
+
     getCreatorCourse: builder.query({
       query: () => ({
         url: "",
@@ -75,7 +70,7 @@ export const courseApi = createApi({
     }),
     getCourseLecture: builder.query({
       query: (courseId) => ({
-        url: `/${courseId}/lecture`, 
+        url: `/${courseId}/lecture`,
         method: "GET",
       }),
       providesTags: ["Refetch_Lecture"],
@@ -110,6 +105,12 @@ export const courseApi = createApi({
       query: ({ courseId, query }) => ({
         url: `/${courseId}?publish=${query}`,
         method: "PATCH",
+      }),
+    }),
+    getPublishedCourse: builder.query({
+      query: () => ({
+        url: "/published-courses",
+        method: "GET",
       }),
     }),
   }),

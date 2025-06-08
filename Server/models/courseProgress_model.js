@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+ import mongoose from "mongoose";
 
 const lectureProgressSchema = new mongoose.Schema({
   lectureId: { type: String },

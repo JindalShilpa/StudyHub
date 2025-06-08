@@ -1,8 +1,8 @@
 import Stripe from "stripe";
-import { Course } from "../models/course.model.js";
-import { CoursePurchase } from "../models/coursePurchase.model.js";
-import { Lecture } from "../models/lecture.model.js";
-import { User } from "../models/user.model.js";
+import { Course } from "../models/course_model.js";
+import { CoursePurchase } from "../models/coursePurchase_model.js";
+import { Lecture } from "../models/lecture_model.js";
+import User from "../models/user_model.js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -147,7 +147,6 @@ export const getCourseDetailWithPurchaseStatus = async (req, res) => {
       .populate({ path: "lectures" });
 
     const purchased = await CoursePurchase.findOne({ userId, courseId });
-    console.log(purchased);
 
     if (!course) {
       return res.status(404).json({ message: "course not found!" });

@@ -4,7 +4,7 @@ import Course from "./Course";
 import MySkeleton from "@/components/MySkelton";
 function MyLearning() {
   const isLoading = false;
-  const myLearningCourse = [1, 2, 3, 4];
+  const myLearningCourse = [];
   return (
     <div className="max-w-4xl mx-auto my-24 px-4 md:px-0">
       <h1 className="font-bold text-2xl">My Learning </h1>
@@ -18,7 +18,7 @@ function MyLearning() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
             {myLearningCourse.map((course, index) => (
-              <Course key={index} />
+              <Course key={index} course={course}/>
             ))}
           </div>
         )}

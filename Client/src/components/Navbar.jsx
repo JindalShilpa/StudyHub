@@ -51,10 +51,12 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-10 h-16 border-b bg-white dark:bg-[#0A0A0A] border-b-gray-200 dark:border-b-gray-800 duration-300">
       {/* Desktop View */}
       <div className="hidden md:flex max-w-7xl mx-auto justify-between items-center h-full px-4">
-        <div className="flex items-center gap-2">
-          <School size={30} />
-          <h1 className="text-2xl font-extrabold">StudyHub</h1>
-        </div>
+        <Link to="/">
+          <div className="flex items-center gap-2">
+            <School size={30} />
+            <h1 className="text-2xl font-extrabold">StudyHub</h1>
+          </div>
+        </Link>
         <div className="flex items-center gap-6">
           <DarkMode />
           {user ? (
@@ -67,7 +69,9 @@ const Navbar = () => {
 
       {/* Mobile View */}
       <div className="flex md:hidden items-center justify-between px-4 h-full">
-        <h1 className="text-2xl font-extrabold">StudyHub</h1>
+        <Link to="/">
+          <h1 className="text-2xl font-extrabold">StudyHub</h1>
+        </Link>
         <MobileNavBar />
       </div>
     </header>
@@ -78,7 +82,7 @@ export default Navbar;
 
 // User Dropdown for Desktop
 const UserMenu = ({ user, onLogout }) => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -105,7 +109,10 @@ const UserMenu = ({ user, onLogout }) => {
         {user.role === "instructor" && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem  onClick={()=> navigate("/admin/dashboard")} className="font-semibold text-green-600 hover:text-green-700">
+            <DropdownMenuItem
+              onClick={() => navigate("/admin/dashboard")}
+              className="font-semibold text-green-600 hover:text-green-700"
+            >
               Dashboard
             </DropdownMenuItem>
           </>
